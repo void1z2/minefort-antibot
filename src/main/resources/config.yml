@@ -1,0 +1,14 @@
+# public list, one username per line
+database-url: "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/database.txt"
+
+# check for new names every 5 minutes
+update-minutes: 5
+
+ban-reason: "Bot Account"
+
+# leave this on unless your ban plugin does not support silent bans
+silent-when-supported: true
+
+# small delay so a fresh install does not dump every command in one tick
+ticks-between-bans: 4
+
