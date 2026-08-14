@@ -11,4 +11,3 @@ silent-when-supported: true
 
 # small delay so a fresh install does not dump every command in one tick
 ticks-between-bans: 4
-

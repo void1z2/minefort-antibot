@@ -1,5 +1,6 @@
 package com.minefart.antibot;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,6 +18,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class MinefortAntiBotPlugin extends JavaPlugin {
+    private static final int BSTATS_PLUGIN_ID = 33379;
     private final AtomicBoolean syncing = new AtomicBoolean(false);
     private PublicDatabase database;
     private BanCommandBuilder.Mode banMode = BanCommandBuilder.Mode.NORMAL;
@@ -30,6 +32,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
         saveDefaultConfig();
         database = new PublicDatabase(getDataFolder());
         detectBanPlugin();
+        startMetrics();
 
         long minutes = Math.max(1L, getConfig().getLong("update-minutes", 5L));
         updateTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, new Runnable() {
@@ -39,6 +42,11 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
             }
         }, 20L, minutes * 60L * 20L);
         getLogger().info("enabled. ban mode: " + banMode.name().toLowerCase() + ", checking every " + minutes + "m");
+    }
+
+    private void startMetrics() {
+        new Metrics(this, BSTATS_PLUGIN_ID);
+        getLogger().info("bStats enabled");
     }
 
     @Override

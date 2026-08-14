@@ -1,6 +1,6 @@
 name: MinefortAntiBot
 main: com.minefart.antibot.MinefortAntiBotPlugin
-version: 1.0.0
+version: 1.0.1
 author: void1z
 description: keeps known minefort raid accounts banned
 softdepend: [LiteBans, AdvancedBan, BanManager, Essentials]
@@ -13,4 +13,3 @@ permissions:
   minefortantibot.admin:
     description: lets staff reload the database
     default: op
-

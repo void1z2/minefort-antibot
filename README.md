@@ -16,6 +16,12 @@ LiteBans and AdvancedBan are detected and use `/ban -s name Bot Account`. other 
 
 config is in `plugins/MinefortAntiBot/config.yml`.
 
+## bStats
+
+bStats support is built into the jar with plugin id `33379`.
+
+the bStats library is shaded and relocated, so servers do not need another plugin or jar.
+
 commands:
 
 - `/mab status`
