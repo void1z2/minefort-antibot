@@ -12,7 +12,7 @@ works on 1.8.8 through current paper/spigot builds. it was compiled against the 
 
 it checks `databasev2.txt` every 5 minutes. entries are UUIDs with an optional last-known name, so renamed accounts stay covered. `database.txt` is only a readable legacy mirror.
 
-LiteBans and AdvancedBan are detected and use a silent `/ban -s uuid Bot Account` command. other plugins use normal `/ban uuid Bot Account`.
+LiteBans and AdvancedBan are detected and use a silent `/ban -s uuid Bot Account` command. other plugins use normal `/ban uuid Bot Account`. Cracked `+Name` entries use the username instead of an offline UUID.
 
 config is in `plugins/MinefortAntiBot/config.yml`.
 
