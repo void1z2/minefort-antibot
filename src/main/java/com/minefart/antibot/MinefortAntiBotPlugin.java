@@ -99,7 +99,8 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
             Bukkit.getScheduler().runTaskLater(this, new Runnable() {
                 @Override
                 public void run() {
-                    String command = BanCommandBuilder.build(banMode, entry.uuid.toString(), reason, silent);
+                    String target = entry.name.startsWith("+") ? entry.name : entry.uuid.toString();
+                    String command = BanCommandBuilder.build(banMode, target, reason, silent);
                     if (!Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)) {
                         getLogger().warning("command failed for " + entry.uuid + ": /" + command);
                     }
