@@ -71,9 +71,9 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
         if (!syncing.compareAndSet(false, true)) return;
         try {
             String url = getConfig().getString("database-url", "");
-            Set<String> downloaded = database.download(url);
-            Set<String> old = database.loadSnapshot();
-            Set<String> added = new LinkedHashSet<String>(downloaded);
+            Set<DatabaseEntry> downloaded = database.download(url);
+            Set<DatabaseEntry> old = database.loadSnapshot();
+            Set<DatabaseEntry> added = new LinkedHashSet<DatabaseEntry>(downloaded);
             added.removeAll(old);
             database.saveSnapshot(downloaded);
             databaseSize = downloaded.size();
@@ -81,7 +81,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
             lastError = "none";
             if (added.isEmpty()) return;
             getLogger().info("database updated, " + added.size() + " new account(s)");
-            queueBans(new ArrayList<String>(added));
+            queueBans(new ArrayList<DatabaseEntry>(added));
         } catch (IOException error) {
             lastError = error.getMessage();
             getLogger().warning("database check failed: " + error.getMessage());
@@ -90,18 +90,18 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
         }
     }
 
-    private void queueBans(final List<String> names) {
+    private void queueBans(final List<DatabaseEntry> entries) {
         final int delay = Math.max(1, getConfig().getInt("ticks-between-bans", 4));
         final String reason = getConfig().getString("ban-reason", "Bot Account");
         final boolean silent = getConfig().getBoolean("silent-when-supported", true);
-        for (int i = 0; i < names.size(); i++) {
-            final String name = names.get(i);
+        for (int i = 0; i < entries.size(); i++) {
+            final DatabaseEntry entry = entries.get(i);
             Bukkit.getScheduler().runTaskLater(this, new Runnable() {
                 @Override
                 public void run() {
-                    String command = BanCommandBuilder.build(banMode, name, reason, silent);
+                    String command = BanCommandBuilder.build(banMode, entry.uuid.toString(), reason, silent);
                     if (!Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)) {
-                        getLogger().warning("command failed for " + name + ": /" + command);
+                        getLogger().warning("command failed for " + entry.uuid + ": /" + command);
                     }
                 }
             }, (long) i * delay);

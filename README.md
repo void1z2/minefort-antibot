@@ -10,9 +10,9 @@ works on 1.8.8 through current paper/spigot builds. it was compiled against the 
 2. put it in `plugins/`
 3. restart the server
 
-it checks `database.txt` every 5 minutes. first startup bans the full list, later checks only ban new names.
+it checks `databasev2.txt` every 5 minutes. entries are UUIDs with an optional last-known name, so renamed accounts stay covered. `database.txt` is only a readable legacy mirror.
 
-LiteBans and AdvancedBan are detected and use `/ban -s name Bot Account`. other plugins use normal `/ban name Bot Account`.
+LiteBans and AdvancedBan are detected and use a silent `/ban -s uuid Bot Account` command. other plugins use normal `/ban uuid Bot Account`.
 
 config is in `plugins/MinefortAntiBot/config.yml`.
 
@@ -27,5 +27,5 @@ commands:
 - `/mab status`
 - `/mab reload`
 
-the database is public here: [database.txt](database.txt)
+the database is public here: [databasev2.txt](databasev2.txt)
 

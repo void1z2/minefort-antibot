@@ -29,5 +29,12 @@ public class BanCommandBuilderTest {
     public void crackedMarkerIsNotSentAsPartOfUsername() {
         assertEquals("ban BotName Bot Account", BanCommandBuilder.build(BanCommandBuilder.Mode.NORMAL, "+BotName", "Bot Account", true));
     }
+
+    @Test
+    public void uuidIsUsedAsTheBanTarget() {
+        assertEquals("ban -s 123e4567-e89b-12d3-a456-426614174000 Bot Account",
+                BanCommandBuilder.build(BanCommandBuilder.Mode.LITEBANS,
+                        "123e4567-e89b-12d3-a456-426614174000", "Bot Account", true));
+    }
 }
 
