@@ -1,8 +1,15 @@
 # public UUID list, one UUID per line with an optional last-known name
 database-url: "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/databasev2.txt"
 
+# old cracked/bedrock names, only + and . entries are used from this list
+legacy-database-url: "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/database.txt"
+
 # check for new names every 5 minutes
 update-minutes: 5
+
+# checks the GitHub releases page for a newer plugin version
+check-updates: true
+update-check-hours: 12
 
 ban-reason: "Bot Account"
 
