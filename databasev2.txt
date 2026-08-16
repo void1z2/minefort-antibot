@@ -1,5 +1,6 @@
 # UUID<TAB>last-known-name
 00baeabe-2713-3b04-a6f9-31f9e2797fa0	zntGrim2eftqurp
+015902e8-c095-4472-89e8-9774e118c7ae	Sl1zoxDriftk3g
 0241ea84-70d8-474e-89c2-beab9c16a34c	immo1rtalNittle
 02db82b5-83de-4fda-9b97-56f429b99f21	CortexDawnm58
 03b56921-af01-4efa-9e8c-7786577373af	zntAshu6kffbn8
@@ -7,6 +8,7 @@
 03f2f2f6-d712-4f2b-ba87-7b129a046e4d	Enji46
 04736fb1-6ada-4e46-ae48-7f7af209ba00	zntSky14gvywza
 053e0a54-8d06-474b-9c76-2c7f66a07165	conquestanalyzer
+0560d812-8da5-4277-a4ff-93497f658d75	Mr_xaio
 06a4b912-23ff-403b-9e4c-362633b62144	bIyBBUkOJl
 07ec724a-a68b-4040-8188-4b063304a483	LGrityxkUwU
 087ec673-95a0-483d-9c19-9ba248413125	L0w0ngEdge96a_
@@ -18,6 +20,7 @@
 0ba7e834-3ec6-44f7-b9ac-44b95e57ed70	ZANATOummhacker
 0bb6a8ce-085f-327f-890f-2ce1f082d465	g00nGalezjtwarv
 0cc9c6c1-6459-4d19-a870-19069aaf4551	Itz__Schmitt
+0d612b7d-0908-452b-ba7b-3383181ea129	Anys01
 0eb3768a-1e94-4730-a787-db147d7471b4	KIKINHawk1kj
 0f870f70-ae4a-43f9-8f42-039d8884b037	ZANATO1q2hacker
 10353cf4-ae12-38bf-9553-359ad1151832	ZANATOv9dhacker
@@ -31,7 +34,7 @@
 1644f634-14d4-3fea-a77e-46bfde600e4e	Fanfanatica
 17792b26-95a3-4799-9f40-70de8f877c62	zntFrost5r91cl21
 17b3c05f-3e82-4450-935e-9c4ef421485b	cem1337_TP5UhTmn
-189e3a9c-28e0-49c3-a78b-3908f16ee307	gP5dSjlIXJ
+189e3a9c-28e0-49c3-a78b-3908f16ee307	ZANATO8ithacker
 18e0235c-1a8f-441c-92e1-dfe6ac81bfb1	qbvhc2vd9k2u4z
 19adc464-c324-415f-85b7-038f621e931b	KIKINFireby0
 1b587b75-73bd-3da6-b14c-fb53a8f07005	07uqqp52m3xu8r
@@ -97,6 +100,7 @@
 4a6c0569-c27f-4ce2-b002-824562f1b7e4	LBladerywUwU
 4c43770c-f5ab-4cc2-a07f-749842a548a5	cem1337_RMbjuUlk
 4cf06b50-3ae6-4899-977d-d258425ed714	Sv2Galeomos3ees
+4fa2d042-0c28-4ea5-99f6-44c9575d2ff1	cem1337_vREaVE3B
 4fc0239a-f385-4f25-9824-514d6f5dc120	Liloisherend8p
 5003f716-2a97-4482-b56e-8f9c5934bb0b	JokerYTTK
 505c2561-b0b8-48ea-841a-d21422e6e5b2	latePickle
@@ -104,7 +108,7 @@
 528acd98-a9c2-459f-863a-e4cf9e5e8012	ny8gfbx13vner4
 53228d99-17a3-4645-83fd-808ca1c9f7e1	LBearml1UwU
 53fe116c-385f-4304-aa91-b56cc051041c	1RLTX4y
-54a8d031-a2ba-4c99-b866-1f4616fcb503	aoolULmorXz
+54a8d031-a2ba-4c99-b866-1f4616fcb503	ZANATOhv9hacker
 54d9325f-6c3b-435a-b038-93e4d94e1121	71209397039475
 551440d5-f7b6-4617-94ed-273340633030	RevLol_Fang_vmp
 551a919d-0142-39ef-a1f0-2e5a0aae127c	es2Glow5lv
@@ -140,7 +144,7 @@
 734368e6-e6d9-4ac7-99e1-c10a17253dc7	ZANATOimphacker
 73f336ec-100c-422a-bba9-4c173c5d6a16	g00nGalezjtwarv
 7449d456-534a-41b6-9138-121aebeacc93	sopellodu
-745dd068-8c54-4639-9b09-2bb431d76d02	4KgtpzGkZ
+745dd068-8c54-4639-9b09-2bb431d76d02	ZANATOt3xhacker
 7548d21c-256b-4d09-9181-47147251bc2a	globularLensiti
 76be38d5-fe47-48d3-97b3-e93e0459b30c	X33V
 79c9304b-2c08-462e-8c8e-26d78ab19734	es2Wildma2
@@ -175,8 +179,10 @@
 957949cd-5eb8-4662-8b33-4715b8a11bba	cookedS4illaino
 9665322a-ffe3-47c7-be6c-0c512cf1c568	Sl1zoxNeonydv
 96686e5c-1622-454b-8c84-1e8db3da9305	mangkornStaresx
+96bc3c93-eccd-4605-844d-977c3625eec2	cem1337_RzBSi0tO
 97b43ed5-8077-4b34-a451-38535f42fd12	Sl1zoxCore70b
 9865fcae-3a8b-48af-ab54-7c3a5e57b5ce	cem1337_sUW4vX81
+9bdd8a34-3022-4eba-bf6d-9e54ee9b09f5	g00nClaw0wfwarv
 9c4b432a-b39b-494d-893b-cc59a9d3570d	KIKINDriftgi2
 9f072064-0904-4ded-b3b9-dd8b1b7608cc	9mjf3wl9uidmgt
 a22254ba-7c7a-325c-81a6-50182399af6d	enemyclanFFAHC
@@ -188,7 +194,7 @@ a7b36e6a-4365-42b2-b9f0-f19a55b04558	cem1337_Xk2rmrdm
 a917b599-1aa4-437c-b2ad-54c68b890735	qripr
 aa065330-ddd0-45ea-a1ad-56f3f15afbd7	0g4qyaryd0k3ov
 ab270466-4d3e-435c-9336-0512bebb4324	ZANATO6gshacker
-ad5a8467-f943-429c-a298-f1777062b980	cem1337_5VuEkcKe
+ad5a8467-f943-429c-a298-f1777062b980	cem1337_t84Br7ZW
 aef53d82-b4a0-4798-8c95-bed7b79c11d0	zntFoxkafy4046
 af09b18b-1f84-435f-88fc-0403de8af563	F4pqz
 afa7adcd-a10c-4a2c-9be0-d055283e3345	Sv2Coredkip441h
@@ -223,7 +229,7 @@ cb204676-ccc4-4abe-b3b9-eed52f81891a	zntFoxo33emsrh
 cba20e92-45fe-4a49-8d8d-34b0593d038b	LWingd4pUwU
 cc0b82d2-dc03-425c-ad83-6fd41c82824a	EntitiloValeiqjd
 cccd065e-edb4-4fa3-9424-37a2c65eb457	875FThO66Hra
-cd550a4d-f7ef-4154-b4dc-bf34c6fb6451	CortexPeakpeu
+cd550a4d-f7ef-4154-b4dc-bf34c6fb6451	KIKINValey1t
 cdfbee8e-be5e-4e97-8072-f1a9121df444	cem1337_s7e5y8vG
 cf8a9da2-26f4-4c49-a655-00534e1d2fcd	Deour_
 d0f0cec2-eeb2-4413-a099-51f4ef0034c0	zntForgeik0ofndd
@@ -259,7 +265,7 @@ ed59676a-6ab2-41dc-b72d-9b06f116bfe8	4MdBg4NgEsrzXJR3
 edaf6e03-fdb2-4fe3-aba5-1538a20dafb4	cem1337_pa4tG3L3
 ee39b2ac-178e-42f9-b861-32d97979a2bf	71208974032
 ef76f935-54c8-43ef-91f3-17a66fa31b2f	zntWolf7t5pdotk
-f2ddf004-851a-4b5f-a56e-81245d4d3e28	cem1337_TUouP2VK
+f2ddf004-851a-4b5f-a56e-81245d4d3e28	cem1337_gbekvmfa
 f33d3de8-f40b-4169-80b4-5977633cebf4	LSharp888UwU
 f37bf9dc-64cc-4d28-9ef0-61d4d09a497f	cem1337_wFMg4adP
 f489a4f6-2b19-49f3-8392-558dc26b7c26	7109384509348512
@@ -271,11 +277,11 @@ f8fba4d4-a004-41c1-a10d-51aa43597327	ZueGrimkb70
 f9099225-8530-4047-83fe-fd369675f300	enemyclanFFAHC
 f95dcbad-b590-4be8-9f4c-c22e04025846	EntitiloGoldh86
 fa5671c0-3f90-4b73-8095-5b143878b910	ixxp63lhffavfp
-fa82109a-1e9c-4a82-ac2d-02edf8f154ef	ArjunVex497loml
+fa82109a-1e9c-4a82-ac2d-02edf8f154ef	LDawn4okUwU
 fa98935f-fa10-4b44-bace-b563387fa8bf	zntGoldohnot8u2
 fab048c3-b42e-48eb-90ef-20ac65f1138c	g00nCorerlvwarv
-fb7c1a81-df08-4637-8473-e407e2335095	TeihmpjjR
-fc3ca792-c7ba-4000-b46e-a192e85edb05	IlAe70RX
+fb7c1a81-df08-4637-8473-e407e2335095	ZANATO8a8hacker
+fc3ca792-c7ba-4000-b46e-a192e85edb05	KIKINFoxviz
 fc69fb69-b6a1-4501-a75d-1d8d6943f1c7	LFangwwhUwU
 fd03aa8a-aa0e-4c8c-a02d-3a7ca1a842f6	LEESTHNTIMCALL
 fd2ef6e2-28d3-43d1-98b2-361321b0a7ef	j2kcsiy7qfdhd8
