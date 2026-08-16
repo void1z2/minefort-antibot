@@ -19,10 +19,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class MinefortAntiBotPlugin extends JavaPlugin {
     private static final int BSTATS_PLUGIN_ID = 33379;
+    private static final String PLUGIN_VERSION = "1.0.2";
+    private static final String UPDATE_API = "https://api.github.com/repos/void1z2/minefort-antibot/releases/latest";
+    private static final String RELEASES_URL = "https://github.com/void1z2/minefort-antibot/releases";
     private final AtomicBoolean syncing = new AtomicBoolean(false);
     private PublicDatabase database;
     private BanCommandBuilder.Mode banMode = BanCommandBuilder.Mode.NORMAL;
     private BukkitTask updateTask;
+    private BukkitTask updateCheckTask;
     private volatile int databaseSize;
     private volatile long lastUpdate;
     private volatile String lastError = "none";
@@ -41,6 +45,15 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
                 syncDatabase();
             }
         }, 20L, minutes * 60L * 20L);
+        if (getConfig().getBoolean("check-updates", true)) {
+            long hours = Math.max(1L, getConfig().getLong("update-check-hours", 12L));
+            updateCheckTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, new Runnable() {
+                @Override
+                public void run() {
+                    checkForPluginUpdate();
+                }
+            }, 40L, hours * 60L * 60L * 20L);
+        }
         getLogger().info("enabled. ban mode: " + banMode.name().toLowerCase() + ", checking every " + minutes + "m");
     }
 
@@ -52,6 +65,19 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         if (updateTask != null) updateTask.cancel();
+        if (updateCheckTask != null) updateCheckTask.cancel();
+    }
+
+    private void checkForPluginUpdate() {
+        try {
+            String latest = UpdateChecker.latestTag(UPDATE_API);
+            if (UpdateChecker.newerThan(PLUGIN_VERSION, latest)) {
+                getLogger().warning("update available: " + latest + " (running " + PLUGIN_VERSION + ")");
+                getLogger().warning("download: " + RELEASES_URL);
+            }
+        } catch (IOException error) {
+            getLogger().fine("update check failed: " + error.getMessage());
+        }
     }
 
     private void detectBanPlugin() {
@@ -76,12 +102,40 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
             Set<DatabaseEntry> added = new LinkedHashSet<DatabaseEntry>(downloaded);
             added.removeAll(old);
             database.saveSnapshot(downloaded);
-            databaseSize = downloaded.size();
+            String legacyUrl = getConfig().getString("legacy-database-url", "");
+            Set<String> legacy;
+            if (legacyUrl == null || legacyUrl.trim().isEmpty()) {
+                legacy = database.loadLegacySnapshot();
+            } else {
+                try {
+                    legacy = database.downloadLegacyNames(legacyUrl);
+                } catch (IOException error) {
+                    getLogger().warning("legacy database check failed: " + error.getMessage());
+                    legacy = database.loadLegacySnapshot();
+                }
+            }
+            Set<String> oldLegacy = database.loadLegacySnapshot();
+            Set<String> addedLegacy = new LinkedHashSet<String>(legacy);
+            addedLegacy.removeAll(oldLegacy);
+            database.saveLegacySnapshot(legacy);
+            for (DatabaseEntry entry : added) {
+                if (isLegacyName(entry.name) && !entry.name.isEmpty()) addedLegacy.add(entry.name);
+            }
+            databaseSize = downloaded.size() + legacy.size();
             lastUpdate = System.currentTimeMillis();
             lastError = "none";
-            if (added.isEmpty()) return;
-            getLogger().info("database updated, " + added.size() + " new account(s)");
-            queueBans(new ArrayList<DatabaseEntry>(added));
+            if (added.isEmpty() && addedLegacy.isEmpty()) return;
+            int uuidCount = 0;
+            List<DatabaseEntry> uuidEntries = new ArrayList<DatabaseEntry>();
+            for (DatabaseEntry entry : added) {
+                if (!isLegacyName(entry.name)) {
+                    uuidEntries.add(entry);
+                    uuidCount++;
+                }
+            }
+            getLogger().info("database updated, " + uuidCount + " uuid account(s), " + addedLegacy.size() + " legacy name(s)");
+            queueBans(uuidEntries);
+            queueUsernames(new ArrayList<String>(addedLegacy));
         } catch (IOException error) {
             lastError = error.getMessage();
             getLogger().warning("database check failed: " + error.getMessage());
@@ -91,22 +145,38 @@ public final class MinefortAntiBotPlugin extends JavaPlugin {
     }
 
     private void queueBans(final List<DatabaseEntry> entries) {
+        List<String> targets = new ArrayList<String>();
+        for (DatabaseEntry entry : entries) {
+            if (isLegacyName(entry.name)) targets.add(entry.name);
+            else targets.add(entry.uuid.toString());
+        }
+        queueTargets(targets);
+    }
+
+    private void queueUsernames(List<String> names) {
+        queueTargets(names);
+    }
+
+    private void queueTargets(final List<String> targets) {
         final int delay = Math.max(1, getConfig().getInt("ticks-between-bans", 4));
         final String reason = getConfig().getString("ban-reason", "Bot Account");
         final boolean silent = getConfig().getBoolean("silent-when-supported", true);
-        for (int i = 0; i < entries.size(); i++) {
-            final DatabaseEntry entry = entries.get(i);
+        for (int i = 0; i < targets.size(); i++) {
+            final String targetName = targets.get(i);
             Bukkit.getScheduler().runTaskLater(this, new Runnable() {
                 @Override
                 public void run() {
-                    String target = entry.name.startsWith("+") ? entry.name : entry.uuid.toString();
-                    String command = BanCommandBuilder.build(banMode, target, reason, silent);
+                    String command = BanCommandBuilder.build(banMode, targetName, reason, silent);
                     if (!Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)) {
-                        getLogger().warning("command failed for " + entry.uuid + ": /" + command);
+                        getLogger().warning("command failed for " + targetName + ": /" + command);
                     }
                 }
             }, (long) i * delay);
         }
+    }
+
+    private boolean isLegacyName(String name) {
+        return name != null && (name.startsWith("+") || name.startsWith("."));
     }
 
     @Override

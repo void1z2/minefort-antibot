@@ -26,7 +26,8 @@ final class BanCommandBuilder {
     }
 
     static String build(Mode mode, String storedName, String reason, boolean silent) {
-        String username = storedName.startsWith("+") ? storedName.substring(1) : storedName;
+        String username = storedName.startsWith("+") || storedName.startsWith(".")
+                ? storedName.substring(1) : storedName;
         String cleanReason = reason.replace('\n', ' ').replace('\r', ' ').trim();
         if (cleanReason.isEmpty()) cleanReason = "Bot Account";
 

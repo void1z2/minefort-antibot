@@ -1,6 +1,6 @@
-# minefort antibot
+# minefort antibot v1.0.2
 
-small spigot plugin that keeps the public bot account list banned on your server.
+small spigot plugin that keeps known bot accounts banned on your server.
 
 works on 1.8.8 through current paper/spigot builds. it was compiled against the old 1.8 api on purpose so it doesnt depend on new server stuff.
 
@@ -10,9 +10,9 @@ works on 1.8.8 through current paper/spigot builds. it was compiled against the 
 2. put it in `plugins/`
 3. restart the server
 
-it checks `databasev2.txt` every 5 minutes. entries are UUIDs with an optional last-known name, so renamed accounts stay covered. `database.txt` is only a readable legacy mirror.
+it checks the public bot list every 5 minutes and bans new accounts automatically. UUIDs are used first, while `+` and `.` names use their username.
 
-LiteBans and AdvancedBan are detected and use a silent `/ban -s uuid Bot Account` command. other plugins use normal `/ban uuid Bot Account`. Cracked `+Name` entries use the username instead of an offline UUID.
+LiteBans and AdvancedBan get the silent ban option. the plugin also checks GitHub for updates.
 
 config is in `plugins/MinefortAntiBot/config.yml`.
 
