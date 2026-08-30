@@ -1,10 +1,12 @@
 # UUID<TAB>last-known-name
 00baeabe-2713-3b04-a6f9-31f9e2797fa0	zntGrim2eftqurp
 015902e8-c095-4472-89e8-9774e118c7ae	Sl1zoxDriftk3g
+0241436f-b651-48cb-a47e-47f9b55153a0	lViggcr
 0241ea84-70d8-474e-89c2-beab9c16a34c	immo1rtalNittle
 02db82b5-83de-4fda-9b97-56f429b99f21	CortexDawnm58
 03b56921-af01-4efa-9e8c-7786577373af	zntAshu6kffbn8
 03c65206-ea7b-4898-82e5-c56a28cf1e6a	ZANATO2mthacker
+03ee1eab-617b-4895-addc-b10356a3a18b	Sl1zox_asyvl
 03f2f2f6-d712-4f2b-ba87-7b129a046e4d	Enji46
 04736fb1-6ada-4e46-ae48-7f7af209ba00	zntSky14gvywza
 04c906a9-3f86-465e-8f90-719c4fae2f32	ovy2k
@@ -25,6 +27,7 @@
 0ba7e834-3ec6-44f7-b9ac-44b95e57ed70	ZANATOummhacker
 0bb6a8ce-085f-327f-890f-2ce1f082d465	g00nGalezjtwarv
 0c07986b-e5dc-4472-a720-0f37ae66bd63	mori0isthebest
+0cb091ca-7c1b-4742-8551-1b1d8ad20905	mogalts_0z8tx
 0cc9c6c1-6459-4d19-a870-19069aaf4551	Itz__Schmitt
 0d612b7d-0908-452b-ba7b-3383181ea129	Anys01
 0eb3768a-1e94-4730-a787-db147d7471b4	KIKINHawk1kj
@@ -47,7 +50,8 @@
 1c40b3c2-c7a1-34ce-8c6b-644083a6785b	ILuvCaffeine
 1c4eee18-ffc9-43ab-b75e-1d894649c84c	g00nSwifti6dwarv
 1ce5c716-edc6-4333-b3f9-afe3496de128	ZANATOuwvhacker
-1d1cf57c-7b44-488e-81c7-6a0d8636e38f	_5Sm4PEP_VaKR
+1ce897ff-8883-412c-8157-bb113900750c	RevLol_Star_wu4
+1d1cf57c-7b44-488e-81c7-6a0d8636e38f	cBeVToLaXI5
 1d525839-f7bf-4858-947c-d128d4390599	wt7wvcxqvfdan2
 1d85af3b-97a4-44bf-aa21-cf7dee5d30b3	o5Rc5YX3N8
 1e47d2fb-f96a-495a-9950-af9e71227107	disanney
@@ -66,6 +70,7 @@
 270f5797-20ae-44b1-9b30-9db883eef7f7	CortexSwiftnbm
 281e8045-5a45-4fb5-983d-382f7848b4bc	ZANATOv9dhacker
 292b164e-7f1c-4136-a8ef-7e5ebe25b422	Sl1zoxStormnts
+29327315-baab-4bd0-845e-5b1ff41387b4	resona9ntuncoor
 2a6b6ce8-c01a-412d-a260-6578a56781e9	ZANATOh3hhacker
 2ac3f771-f89c-45de-b000-347280aa4b07	L0w0ngBladei87_
 2bdb4ee0-930e-4ff9-86c2-235ca27d351c	KIKINGrim2h2
@@ -84,6 +89,7 @@
 38242696-a7e0-4ea3-a077-5ef4ca969636	1VqnasH2qUk6
 38ff37a4-c0d6-42a3-bfce-99b8727be1d3	2rw4v1z5ohnui2
 3a03a601-1a71-414e-a14c-678661862cd7	XLOLwfR7y3
+3a144c18-e7a7-48ea-a057-7e271f9d5864	Key1ew
 3a470b07-5e6d-4966-99a5-1873569af228	ly7tbqpszlsmz4
 3aa5d69f-ab6c-4887-81f9-dd9e48475614	mangkorn_wriVE
 3b423ead-fb66-4352-8eec-743810ee8736	OXC8OdEaD6Xj
@@ -101,6 +107,7 @@
 408ee315-8431-486f-b0e4-45ed5caf201a	giu399cajqqfy8
 4206af9e-9644-46be-a24d-7c54dcc15e0a	vault61h1wf9
 424adf3e-ccf3-4cae-adde-0294682ed73d	dofvjohniqb1ok
+432c5da8-4f49-463a-a701-76fa8100ab05	Pvd_da_GABI
 439e824b-deb7-4b09-878d-0ed2730f9683	cem1337_WQ8SBbnr
 43eb311f-fe52-4d75-a3ec-f882dff483a6	Sv2Vext4cv4blk
 4467600b-186b-4422-8e6a-eebd5e4212c6	w6WKrpWMUDN_tqQH
@@ -114,6 +121,7 @@
 47ff2b76-7737-4bbe-bf7b-d18a148751fe	Sl1zoxPulse6mj
 485aea18-6a67-4f6e-bd46-54910983ce11	WIJzYyHzmbS
 48c11a5f-9456-4a4d-be82-8e66caaf6d42	6TkjUbSLfu
+48ee0df3-e7ab-42fe-b358-07c155923cb3	cem1337_pNqT3JxX
 48ef7056-2603-41d2-8ddc-63bf758ff655	TrophicMist0
 49a00f92-43c8-4455-866f-3e4ff7e5dc64	MYb9Zb
 4a5c0247-bb1d-4ab3-8d93-4ad95cda0501	ZANATOwsjhacker
@@ -162,6 +170,7 @@
 69ce2968-7718-44b3-8afd-a8e957b92e6a	zntSkyeq06thag
 6c2af04b-a381-4f19-8939-9b7fa4f7b40b	thoughtles1sabl
 6cd8eec9-6719-4868-b4f1-01b58bb0f5ab	disloyalUonretu
+6d9a3f76-254d-4095-9ab3-ccff30b5d52e	ravanwasherejnp
 6dc2e851-1bb6-4ac0-a522-1a916b65e806	hcsdk1u9phe935
 6e99b37b-87b5-48fd-920f-3481d6c626e6	07uqqp52m3xu8r
 6ea30e29-872c-441f-851f-7a8821d796f8	xkp1ewrgis5if9
@@ -181,11 +190,14 @@
 79c9304b-2c08-462e-8c8e-26d78ab19734	es2Wildma2
 79d09282-e797-46d4-a917-18a51f2aabdc	zntLynxq9ozq9qm
 7a16f2ba-39ca-49b5-bb6e-55a06ce94a2d	LsnuiU0718
+7aebc30b-e74b-4738-bae2-df151c7b07d9	heartyu6nwritte
 7c21cd85-7447-464f-944f-cdc31a52dd23	VvsZxDVoHuyeKV
 7c81c8b3-7869-4be7-88f2-918ecfa54b9a	mogalts_jrup0
 7e3e6e5b-b42e-4431-a171-cc9cf80c6e05	cem1337_6KtH013f
 7e554ced-a740-4271-908d-4039e0636d49	cem1337_JPONOyH9
 801668f2-a567-468b-b56f-63c181cdf52e	LinhzfBfi0623
+80385035-327c-42bb-bf0a-acbcab277cca	mogalts_o6156
+80956d04-5359-45ff-a2a6-1076f389219a	Entitiloxf93
 82241fdb-153d-4aa5-8eca-ca33e51170cf	ravanwashere32x
 8339596c-8c47-4c5e-a316-c37179732de0	mogalts_ryu50
 84fe62d1-c4be-4826-9052-5a41b6b2f1e6	LIceusiUwU
@@ -253,6 +265,7 @@ b559f1b7-b958-44f3-b443-37569376d5c1	6ppn
 b67f3e49-67ef-4cfe-aeab-b13654470f3a	LCorexpjUwU
 b6b77200-4177-4247-8d29-1626dace787e	zQ5D
 b72d3f34-36a7-47e1-b9ba-b45270043684	RevLol_Sharp_yv6
+b80428e0-2837-47d6-a09c-6db055f0e05c	cem1337_lIJpQahd
 b80762be-d049-4614-b13f-ccfd43c884ba	ov2erwroughtDen
 b821286b-6c14-4001-a5e8-f84c454749be	ShyebyMC
 b87ab3af-67ac-38e1-b2f8-ff9451368675	zntForgeik0ofndd
@@ -260,6 +273,7 @@ b921c9a0-738e-4651-8c10-9533674f7cfe	71290937304570
 b9c127e7-c7d5-41e0-a420-d3f3727753d2	cem1337_yqoFd8zm
 b9c9b328-a59b-404e-b925-0c53e0864b85	ZANATO4n1hacker
 bade9f96-586c-4471-b841-33807d5053d9	Entitilo_6t6a
+bae8b4e4-53a5-4acf-bc0f-40b33052aedb	ambulantAnescap
 bc1c4c48-90ae-45b9-a454-bfdc790d4034	ba0x6hisfi2xoo
 bdbe6c36-c20b-4a17-b2ba-acda1057ca12	Flegmus
 be4871c4-ddfd-441c-ba2a-275d91d23267	rtyp6kjy0zmjx2
@@ -276,6 +290,7 @@ c9036bf0-b724-4790-9789-bebe4113e8e9	g00nVex5fgwarv
 ca24dc57-fe2c-4161-ba25-2479e975578a	mogalts_bpq6k
 cadc1f2a-a03e-4536-b4d3-f0a0e7329298	Sv2RayGold7g5
 cb204676-ccc4-4abe-b3b9-eed52f81891a	zntFoxo33emsrh
+cb7f8524-8ffa-4ad1-9d86-132c62b7fde7	mogalts_bot0b
 cba20e92-45fe-4a49-8d8d-34b0593d038b	LWingd4pUwU
 cc0b82d2-dc03-425c-ad83-6fd41c82824a	EntitiloValeiqjd
 cc294016-20a1-4796-b643-305b31238cce	KIKINFluxhp7
@@ -301,6 +316,7 @@ dc648f95-7d78-4dde-a8ca-20dd30d7875b	iikeaopvp_
 dc917b5e-ab41-4213-8365-6a79fff311a0	_l1F9mfQ
 dcec88d8-f3c7-4f76-9d87-d9a822c30182	cem1337_UP2Nphs7
 dd0c37de-7f55-4d1f-8131-7479f92cd3c6	sahlkm
+ddb1321e-9000-47fa-a5fc-9db924ead4d2	KIKINWing7ce
 de58e0f2-8bc5-4f86-8fce-0bd6f1f516aa	relapseSwift9l7
 e0366d41-9007-41c2-8e70-74808a6fd03e	ZANATO2cohacker
 e18cb2f8-f265-427f-bd7e-8f37082ee7a9	Sv2Valejdi1iznz
@@ -313,12 +329,14 @@ e35772a5-06de-4220-a380-a92ef3adb760	cem1337_eou6eYnH
 e449dc88-beb4-4117-badf-dc5dd89e82ad	Sv2Vexd28
 e4814aec-a7f8-4fa2-8089-8fdcce593bb7	Sv2Peakjzlummzh
 e5595892-c227-4095-b4e3-4c8e3a1189fc	LBoltcxjUwU
+e58930a6-6121-4c38-a67b-c740d8b9d9be	KIKINStorm8s2
 e5b5871f-54bb-4123-95a0-79833ed0b2f4	commemorati6veA
 e6cca247-798e-4381-a056-6d715c0e9536	tanyoan
 e7836c34-4353-4a1c-bb4a-d09b724a2279	wi9ljLl_AS
 e84bdc70-bf0f-4ae8-a40a-7303037fdc65	RevLolVexq4k
 e8dc6335-f5c3-47cc-8ace-c405c575cf38	cleitonbombeiro
 e9b000e5-5936-4b1c-bf05-49f487099526	qp94lracwvuyo1
+ec2df3a9-4b3d-4e8e-8eb2-222140ce5068	Sl1zox_XADyp
 ecb5dbd5-2142-478e-bd65-5a5bd8ab2d79	Sv2Bladeajt
 ecea59ff-3176-44d4-b49a-57bbaabb1877	LPeakwzjUwU
 ed59676a-6ab2-41dc-b72d-9b06f116bfe8	4MdBg4NgEsrzXJR3
