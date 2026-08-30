@@ -200,6 +200,7 @@ KIKINFireby0
 KIKINFiredxm
 KIKINFluxhp7
 KIKINFluxnaq
+KIKINFluxo5n
 KIKINFluxp7g
 KIKINFluxtmc
 KIKINForgeho9
@@ -407,6 +408,7 @@ Sv2Coredkip441h
 Sv2Fangger
 Sv2Foxd2r
 Sv2FrostqvwgUwU
+Sv2Galentu
 Sv2Galeomos3ees
 Sv2Goldhko
 Sv2Icehwr
