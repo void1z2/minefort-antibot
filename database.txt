@@ -575,6 +575,7 @@ ltc_m7wdgu
 ltc_sww4wo
 ltc_tbsj13
 ltc_xgrddl
+Luma_Bot
 LunarAshsbxLNR
 LunarEdgewpaLNR
 LunarIronw91LNR
