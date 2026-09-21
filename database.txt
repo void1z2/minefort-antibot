@@ -484,6 +484,7 @@ KIKINCore61b
 KIKINCoreck7
 KIKINCorefcs
 KIKINCoreo73
+KIKINCorepe3
 KIKINCorev1x
 KIKINCoreyg7
 KIKINCorezru
@@ -532,6 +533,7 @@ KIKINFoxas2
 KIKINFoxviz
 KIKINFoxydv
 KIKINFrostttg
+KIKINGaleasa
 KIKINGalec85
 KIKINGaled2s
 KIKINGalejyo
