@@ -1,20 +1,22 @@
-# public UUID list, one UUID per line with an optional last-known name
-database-url: "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/databasev2.txt"
+# exact usernames | normal Java names plus + offline names and . Bedrock names
+database-url: "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/database.txt"
 
-# old cracked/bedrock names, only + and . entries are used from this list
-legacy-database-url: "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/database.txt"
-
-# check for new names every 5 minutes
-update-minutes: 5
+# check for new names every minute
+update-minutes: 1
 
 # checks the GitHub releases page for a newer plugin version
 check-updates: true
 update-check-hours: 12
 
-ban-reason: "Bot Account"
+blocked-message: "&cminefart antibot &8| &7access denied"
 
-# leave this on unless your ban plugin does not support silent bans
-silent-when-supported: true
+raid:
+  minimum-known-accounts: 3
+  window-seconds: 40
+  incident-seconds: 60
 
-# small delay so a fresh install does not dump every command in one tick
-ticks-between-bans: 4
+# Kixae only links a server after it has joined that exact server
+v3:
+  base-url: "https://minef.art"
+  allow-http: false
+  verifier-name: "Kixae"

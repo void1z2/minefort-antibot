@@ -6,7 +6,7 @@
 
     <groupId>com.minefart</groupId>
     <artifactId>minefort-antibot</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <name>MinefortAntiBot</name>
 
     <properties>
@@ -41,6 +41,12 @@
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
             <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-chat</artifactId>
+            <version>1.16-R0.4</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

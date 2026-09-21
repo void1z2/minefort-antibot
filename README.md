@@ -1,8 +1,8 @@
-# minefort antibot v1.0.2
+# minefort antibot v1.1.0
 
-small spigot plugin that keeps known bot accounts banned on your server.
+blocks known Minefort raid accounts before they can enter your server.
 
-works on 1.8.8 through current paper/spigot builds. it was compiled against the old 1.8 api on purpose so it doesnt depend on new server stuff.
+the plugin downloads the public username database every minute and keeps a local copy if GitHub is temporarily unavailable. normal Java names, `+` offline names and `.` Bedrock names are supported.
 
 ## install
 
@@ -10,22 +10,29 @@ works on 1.8.8 through current paper/spigot builds. it was compiled against the 
 2. put it in `plugins/`
 3. restart the server
 
-it checks the public bot list every 5 minutes and bans new accounts automatically. UUIDs are used first, while `+` and `.` names use their username.
+no punishment plugin or operator account is needed.
 
-LiteBans and AdvancedBan get the silent ban option. the plugin also checks GitHub for updates.
+## raid alerts
 
-config is in `plugins/MinefortAntiBot/config.yml`.
+when known bot accounts hit the server together, online staff receive one compact raid alert. hover over it to see the usernames.
 
-## bStats
+the plugin can also report the incident to Kixae using the signed V3 service at `https://minef.art`.
 
-bStats support is built into the jar with plugin id `33379`.
+Kixae must be on the server first. Run `.linkverify SERVER` from Kixae's terminal while it is in that server. Kixae runs the one-time link command itself; no signing key exists until this succeeds.
 
-the bStats library is shaded and relocated, so servers do not need another plugin or jar.
+This stops a plugin on one server from claiming it is installed on a different server. The plugin connects to `minef.art` and saves its signing key in `v3-link.properties`. that file is private and should not be shared.
 
-commands:
+## commands
 
-- `/mab status`
-- `/mab reload`
+`/mab status`
 
-the database is public here: [databasev2.txt](databasev2.txt)
+`/mab reload`
+
+## other stuff
+
+bStats is included using plugin id `33379`.
+
+the plugin checks GitHub releases for updates.
+
+the public username database is [database.txt](database.txt).
 

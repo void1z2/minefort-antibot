@@ -1,15 +1,17 @@
 name: MinefortAntiBot
 main: com.minefart.antibot.MinefortAntiBotPlugin
-version: 1.0.2
+version: 1.1.0
 author: void1z
-description: keeps known bot accounts banned
-softdepend: [LiteBans, AdvancedBan, BanManager, Essentials]
+description: blocks known raid bot usernames before they join
 commands:
   minefortantibot:
-    description: shows status or reloads the database
+    description: status, database reload and report linking
     aliases: [mab]
-    usage: /mab [status|reload]
+    usage: /mab [status|reload|link <server-name> <Kixae-code>]
 permissions:
   minefortantibot.admin:
-    description: lets staff reload the database
+    description: lets staff reload the database and link reports
+    default: op
+  minefortantibot.alerts:
+    description: shows compact raid alerts
     default: op

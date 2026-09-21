@@ -12,142 +12,78 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 final class PublicDatabase {
     private static final Pattern USERNAME = Pattern.compile("^[+.]?[A-Za-z0-9_]{1,16}$");
     private final File snapshotFile;
-    private final File legacySnapshotFile;
 
     PublicDatabase(File dataFolder) {
-        this.snapshotFile = new File(dataFolder, "databasev2-snapshot.txt");
-        this.legacySnapshotFile = new File(dataFolder, "database-legacy-snapshot.txt");
+        this.snapshotFile = new File(dataFolder, "database-snapshot.txt");
     }
 
-    Set<DatabaseEntry> download(String address) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(address).openConnection();
-        connection.setConnectTimeout(10000);
-        connection.setReadTimeout(15000);
-        connection.setRequestProperty("User-Agent", "MinefortAntiBot/1.1");
-        connection.setUseCaches(false);
-        int status = connection.getResponseCode();
+    Set<String> download(String address) throws IOException {
+        if (address == null || address.trim().isEmpty()) throw new IOException("database url is empty");
+        HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
+        con.setConnectTimeout(10000);
+        con.setReadTimeout(15000);
+        con.setRequestProperty("User-Agent", "MinefortAntiBot/1.1.0");
+        con.setUseCaches(false);
+        int status = con.getResponseCode();
         if (status < 200 || status >= 300) {
-            connection.disconnect();
+            con.disconnect();
             throw new IOException("database returned http " + status);
         }
         try {
-            return read(connection.getInputStream());
+            Set<String> names = read(con.getInputStream());
+            if (names.isEmpty()) throw new IOException("database contained no valid usernames");
+            return names;
         } finally {
-            connection.disconnect();
+            con.disconnect();
         }
     }
 
-    Set<DatabaseEntry> loadSnapshot() throws IOException {
-        if (!snapshotFile.isFile()) return new LinkedHashSet<DatabaseEntry>();
+    Set<String> loadSnapshot() throws IOException {
+        if (!snapshotFile.isFile()) return new LinkedHashSet<String>();
         return read(new FileInputStream(snapshotFile));
     }
 
-    Set<String> downloadLegacyNames(String address) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(address).openConnection();
-        connection.setConnectTimeout(10000);
-        connection.setReadTimeout(15000);
-        connection.setRequestProperty("User-Agent", "MinefortAntiBot/1.0.2");
-        int status = connection.getResponseCode();
-        if (status < 200 || status >= 300) {
-            connection.disconnect();
-            throw new IOException("legacy database returned http " + status);
-        }
-        try {
-            return readLegacy(connection.getInputStream());
-        } finally {
-            connection.disconnect();
-        }
-    }
-
-    Set<String> loadLegacySnapshot() throws IOException {
-        if (!legacySnapshotFile.isFile()) return new LinkedHashSet<String>();
-        return readLegacy(new FileInputStream(legacySnapshotFile));
-    }
-
-    void saveLegacySnapshot(Set<String> names) throws IOException {
-        if (!legacySnapshotFile.getParentFile().exists() && !legacySnapshotFile.getParentFile().mkdirs()) {
-            throw new IOException("could not make plugin folder");
-        }
-        File temporary = new File(legacySnapshotFile.getParentFile(), legacySnapshotFile.getName() + ".tmp");
-        Writer writer = new OutputStreamWriter(new FileOutputStream(temporary), StandardCharsets.UTF_8);
-        try {
-            for (String name : names) writer.write(name + '\n');
-        } finally {
-            writer.close();
-        }
-        if (legacySnapshotFile.exists() && !legacySnapshotFile.delete()) throw new IOException("could not replace old legacy snapshot");
-        if (!temporary.renameTo(legacySnapshotFile)) throw new IOException("could not save legacy snapshot");
-    }
-
-    void saveSnapshot(Set<DatabaseEntry> entries) throws IOException {
+    void saveSnapshot(Set<String> names) throws IOException {
+        if (names == null || names.isEmpty()) throw new IOException("refusing to save empty database");
         if (!snapshotFile.getParentFile().exists() && !snapshotFile.getParentFile().mkdirs()) {
             throw new IOException("could not make plugin folder");
         }
-        File temporary = new File(snapshotFile.getParentFile(), snapshotFile.getName() + ".tmp");
-        Writer writer = new OutputStreamWriter(new FileOutputStream(temporary), StandardCharsets.UTF_8);
+        List<String> sorted = new ArrayList<String>(names);
+        Collections.sort(sorted, String.CASE_INSENSITIVE_ORDER);
+        File temp = new File(snapshotFile.getParentFile(), snapshotFile.getName() + ".tmp");
+        Writer writer = new OutputStreamWriter(new FileOutputStream(temp), StandardCharsets.UTF_8);
         try {
-            for (DatabaseEntry entry : entries) {
-                writer.write(entry.uuid.toString());
-                if (!entry.name.isEmpty()) {
-                    writer.write('\t');
-                    writer.write(entry.name);
-                }
-                writer.write('\n');
-            }
+            for (String name : sorted) writer.write(name + '\n');
         } finally {
             writer.close();
         }
-        if (snapshotFile.exists() && !snapshotFile.delete()) throw new IOException("could not replace old snapshot");
-        if (!temporary.renameTo(snapshotFile)) throw new IOException("could not save snapshot");
+        if (snapshotFile.exists() && !snapshotFile.delete()) throw new IOException("could not replace old database cache");
+        if (!temp.renameTo(snapshotFile)) throw new IOException("could not save database cache");
     }
 
-    private Set<DatabaseEntry> read(InputStream stream) throws IOException {
-        Map<UUID, DatabaseEntry> entries = new LinkedHashMap<UUID, DatabaseEntry>();
+    private Set<String> read(InputStream stream) throws IOException {
+        Map<String, String> names = new LinkedHashMap<String, String>(); // keeps the first spelling it sees
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
         try {
             String line;
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
-                if (line.isEmpty() || line.startsWith("#")) continue;
-                String[] columns = line.split("\\s+", 2);
-                UUID uuid;
-                try {
-                    uuid = UUID.fromString(columns[0]);
-                } catch (IllegalArgumentException ignored) {
-                    continue;
-                }
-                String name = columns.length > 1 ? columns[1].trim() : "";
-                if (!name.isEmpty() && !USERNAME.matcher(name).matches()) name = "";
-                if (!entries.containsKey(uuid)) entries.put(uuid, new DatabaseEntry(uuid, name));
-            }
-        } finally {
-            reader.close();
-        }
-        return new LinkedHashSet<DatabaseEntry>(entries.values());
-    }
-
-    private Set<String> readLegacy(InputStream stream) throws IOException {
-        Map<String, String> names = new LinkedHashMap<String, String>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
-        try {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (!line.isEmpty() && !line.startsWith("#") && USERNAME.matcher(line).matches()
-                        && (line.startsWith("+") || line.startsWith("."))) {
-                    String key = line.toLowerCase();
-                    if (!names.containsKey(key)) names.put(key, line);
-                }
+                if (line.isEmpty() || line.startsWith("#") || !USERNAME.matcher(line).matches()) continue;
+                String id = line.toLowerCase(Locale.ROOT);
+                if (!names.containsKey(id)) names.put(id, line);
             }
         } finally {
             reader.close();
