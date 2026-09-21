@@ -21,3 +21,4 @@ v3:
   allow-http: false
   verifier-name: "Kixae"
   verifier-uuid: "f306579c-18d7-49b7-a58e-5c065d985107"
+  roster-seconds: 60

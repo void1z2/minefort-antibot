@@ -29,7 +29,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener {
     private static final int BSTATS_PLUGIN_ID = 33379;
-    private static final String PLUGIN_VERSION = "1.1.1";
+    private static final String PLUGIN_VERSION = "1.1.2";
+    private static final String CURRENT_DATABASE_URL = "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/database.txt";
     private static final String UPDATE_API = "https://api.github.com/repos/void1z2/minefort-antibot/releases/latest";
     private static final String RELEASES_URL = "https://github.com/void1z2/minefort-antibot/releases";
     private static final String PREFIX = ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Minefart" + ChatColor.DARK_GRAY + "] ";
@@ -45,6 +46,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
     private V3Reporter reporter;
     private BukkitTask updateTask;
     private BukkitTask updateCheckTask;
+    private BukkitTask rosterTask;
 
     @Override
     public void onEnable() {
@@ -73,6 +75,14 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
             }, 40L, hours * 60L * 60L * 20L);
         }
 
+        long rosterSeconds = Math.max(30L, getConfig().getLong("v3.roster-seconds", 60L));
+        rosterTask = Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
+            @Override
+            public void run() {
+                sendRoster();
+            }
+        }, 100L, rosterSeconds * 20L);
+
         getLogger().info("enabled | blocking before login | database " + blockedNames.size() + " | checking every " + minutes + "m");
     }
 
@@ -80,6 +90,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
     public void onDisable() {
         if (updateTask != null) updateTask.cancel();
         if (updateCheckTask != null) updateCheckTask.cancel();
+        if (rosterTask != null) rosterTask.cancel();
     }
 
     private void setupStuff() {
@@ -112,7 +123,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
     private void syncDatabase() {
         if (!syncing.compareAndSet(false, true)) return;
         try {
-            Set<String> names = database.download(getConfig().getString("database-url", ""));
+            Set<String> names = database.download(databaseUrl());
             database.saveSnapshot(names);
             putNames(names, "remote");
             getLogger().info("database updated | " + names.size() + " usernames");
@@ -122,6 +133,30 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
         } finally {
             syncing.set(false);
         }
+    }
+
+    private void sendRoster() {
+        if (reporter == null || !reporter.isLinked()) return;
+        final Set<String> names = new LinkedHashSet<String>();
+        for (Player player : Bukkit.getOnlinePlayers()) names.add(player.getName());
+        Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+            @Override
+            public void run() {
+                reporter.reportRoster(names);
+            }
+        });
+    }
+
+    private String databaseUrl() {
+        String configured = getConfig().getString("database-url", "").trim();
+        // v1.0.2 pointed this at databasev2.txt, which is a UUID list and is
+        // not readable by the modern pre-login username blocker. Switching
+        // that known old setting here makes a straight JAR upgrade safe.
+        if (configured.toLowerCase(Locale.ROOT).contains("databasev2")) {
+            getLogger().info("old v1.0 database setting found | using current username list");
+            return CURRENT_DATABASE_URL;
+        }
+        return configured.isEmpty() ? CURRENT_DATABASE_URL : configured;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

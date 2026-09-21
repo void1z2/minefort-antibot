@@ -6,7 +6,7 @@
 
     <groupId>com.minefart</groupId>
     <artifactId>minefort-antibot</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <name>MinefortAntiBot</name>
 
     <properties>

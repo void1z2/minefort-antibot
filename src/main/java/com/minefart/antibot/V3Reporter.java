@@ -79,12 +79,24 @@ final class V3Reporter {
 
     void reportRaid(Set<String> names, long startedAt, long endedAt, int databaseSize) {
         if (!isLinked() || !validTransport()) return;
-        String nonce = UUID.randomUUID().toString().replace("-", "");
-        long timestamp = System.currentTimeMillis();
         String body = "{\"type\":\"known_raid\",\"server\":\"" + json(serverName)
                 + "\",\"startedAt\":" + startedAt + ",\"endedAt\":" + endedAt
                 + ",\"databaseSize\":" + databaseSize + ",\"pluginVersion\":\"" + json(pluginVersion)
                 + "\",\"usernames\":[" + jsonNames(names) + "]}";
+        sendEvent(body);
+    }
+
+    void reportRoster(Set<String> names) {
+        if (!isLinked() || !validTransport()) return;
+        String body = "{\"type\":\"player_roster\",\"server\":\"" + json(serverName)
+                + "\",\"sampledAt\":" + System.currentTimeMillis() + ",\"pluginVersion\":\"" + json(pluginVersion)
+                + "\",\"usernames\":[" + jsonNames(names) + "]}";
+        sendEvent(body);
+    }
+
+    private void sendEvent(String body) {
+        String nonce = UUID.randomUUID().toString().replace("-", "");
+        long timestamp = System.currentTimeMillis();
         HttpURLConnection connection = null;
         try {
             byte[] bytes = body.getBytes(StandardCharsets.UTF_8);

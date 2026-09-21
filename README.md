@@ -7,6 +7,7 @@ stops known bot accounts before they join your Minefort server.
 - no ban plugin needed
 - no op needed
 - keeps working from its saved list if GitHub is down for a bit
+- upgrades cleanly from older MinefortAntiBot versions, including their old saved lists
 
 ## install
 
@@ -24,11 +25,7 @@ stops known bot accounts before they join your Minefort server.
 
 if a few known accounts try joining close together, staff get one small alert. hover it to see the names.
 
-want Kixae to get the alert too? when Kixae is in your server, use:
-
-`.linkverify yourserver`
-
-the plugin links only after Kixae is actually there.
+when Kixae is OP in your server, it can link the server and receive signed raid reports and player-list snapshots. Kixae never gets OP automatically.
 
 it also checks for plugin updates on its own.
 

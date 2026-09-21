@@ -25,9 +25,15 @@ import java.util.regex.Pattern;
 final class PublicDatabase {
     private static final Pattern USERNAME = Pattern.compile("^[+.]?[A-Za-z0-9_]{1,16}$");
     private final File snapshotFile;
+    private final File oldV2SnapshotFile;
+    private final File oldLegacySnapshotFile;
 
     PublicDatabase(File dataFolder) {
         this.snapshotFile = new File(dataFolder, "database-snapshot.txt");
+        // v1.0.2 used these names. Keep reading them on upgrade so the server
+        // is protected before the first new download finishes.
+        this.oldV2SnapshotFile = new File(dataFolder, "databasev2-snapshot.txt");
+        this.oldLegacySnapshotFile = new File(dataFolder, "database-legacy-snapshot.txt");
     }
 
     Set<String> download(String address) throws IOException {
@@ -35,7 +41,7 @@ final class PublicDatabase {
         HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
         con.setConnectTimeout(10000);
         con.setReadTimeout(15000);
-        con.setRequestProperty("User-Agent", "MinefortAntiBot/1.1.1");
+        con.setRequestProperty("User-Agent", "MinefortAntiBot/1.1.2");
         con.setUseCaches(false);
         int status = con.getResponseCode();
         if (status < 200 || status >= 300) {
@@ -52,8 +58,15 @@ final class PublicDatabase {
     }
 
     Set<String> loadSnapshot() throws IOException {
-        if (!snapshotFile.isFile()) return new LinkedHashSet<String>();
-        return read(new FileInputStream(snapshotFile));
+        Set<String> names = new LinkedHashSet<String>();
+        if (snapshotFile.isFile()) names.addAll(read(new FileInputStream(snapshotFile)));
+
+        // Old UUID entries were written as "uuid username". A UUID without a
+        // last-known name cannot be used for the pre-login name check, but the
+        // names that are there remain useful until the new list is downloaded.
+        if (oldV2SnapshotFile.isFile()) names.addAll(readOldV2(new FileInputStream(oldV2SnapshotFile)));
+        if (oldLegacySnapshotFile.isFile()) names.addAll(read(new FileInputStream(oldLegacySnapshotFile)));
+        return names;
     }
 
     void saveSnapshot(Set<String> names) throws IOException {
@@ -84,6 +97,26 @@ final class PublicDatabase {
                 if (line.isEmpty() || line.startsWith("#") || !USERNAME.matcher(line).matches()) continue;
                 String id = line.toLowerCase(Locale.ROOT);
                 if (!names.containsKey(id)) names.put(id, line);
+            }
+        } finally {
+            reader.close();
+        }
+        return new LinkedHashSet<String>(names.values());
+    }
+
+    private Set<String> readOldV2(InputStream stream) throws IOException {
+        Map<String, String> names = new LinkedHashMap<String, String>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        try {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty() || line.startsWith("#")) continue;
+                String[] parts = line.split("\\s+", 2);
+                if (parts.length != 2 || !USERNAME.matcher(parts[1].trim()).matches()) continue;
+                String name = parts[1].trim();
+                String id = name.toLowerCase(Locale.ROOT);
+                if (!names.containsKey(id)) names.put(id, name);
             }
         } finally {
             reader.close();

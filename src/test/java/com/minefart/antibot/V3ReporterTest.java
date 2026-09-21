@@ -45,7 +45,7 @@ public class V3ReporterTest {
             YamlConfiguration config = new YamlConfiguration();
             config.set("v3.base-url", "http://127.0.0.1:" + server.getAddress().getPort());
             config.set("v3.allow-http", true);
-            V3Reporter reporter = new V3Reporter(folder, config, Logger.getAnonymousLogger(), "1.1.0");
+            V3Reporter reporter = new V3Reporter(folder, config, Logger.getAnonymousLogger(), "1.1.2");
 
             assertEquals("linked to dueled | signed reports enabled", reporter.install("Dueled", "KIXAE123"));
             assertTrue(reporter.isLinked());
@@ -71,7 +71,7 @@ public class V3ReporterTest {
         File folder = Files.createTempDirectory("mab-link-invalid-").toFile();
         YamlConfiguration config = new YamlConfiguration();
         config.set("v3.base-url", "https://minef.art");
-        V3Reporter reporter = new V3Reporter(folder, config, Logger.getAnonymousLogger(), "1.1.0");
+        V3Reporter reporter = new V3Reporter(folder, config, Logger.getAnonymousLogger(), "1.1.2");
         assertEquals("link failed | invalid server name", reporter.install("not a server", "KIXAE123"));
         assertEquals("link failed | invalid Kixae handshake", reporter.install("dueled", "no"));
     }
