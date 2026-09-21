@@ -87,7 +87,7 @@
 16cfd40f-c274-4866-8cdf-6d568c13bd01	hacoi1711gtd1
 17476af5-6a9d-4944-ad03-f3e00d11dd2d	mogalts_u0wdc
 17792b26-95a3-4799-9f40-70de8f877c62	lBgzJTzw
-179559c5-2744-47c5-8cfc-428fde4a9ee8	pinkBter1eotypi
+179559c5-2744-47c5-8cfc-428fde4a9ee8	cem1337_IKUOIAgy
 17b3c05f-3e82-4450-935e-9c4ef421485b	cem1337_TP5UhTmn
 183c2fa5-1d70-4ac5-84c2-42b9e2404951	Sl1zoxFrostiuj
 18556cc7-baf3-496c-a0b0-071eae3fee6e	ShiroGritnb7
@@ -135,6 +135,7 @@
 2283c837-e0dc-4ea1-9b61-1d175e7cd5bd	relapsee_Corezcf
 22e6db9e-9013-40fe-9bcd-60e82f756e25	ZueCrimt590
 2336a4c9-0627-4f3a-baeb-addde8a9be0d	ravanwashere3c5
+234d5ff1-1927-436f-a68b-018192f87a68	cem1337_Ju0VzGwA
 235de3ae-916a-46bc-bd57-dd57a1e2c1f1	KIKINCorefcs
 23921fc8-96a3-43c5-9876-0970e6c57dd4	btc_zo56c6naj25w
 23d1828f-6091-4b0c-a3dd-269583ec49aa	relapsee_Edgen2w
@@ -275,6 +276,7 @@
 49a00f92-43c8-4455-866f-3e4ff7e5dc64	MYb9Zb
 4a129ba8-23a5-45db-803e-e24fd345529c	relapsee_Wild0p5
 4a3f46a8-ac0c-46d1-ba9a-c8e32398d2a9	cem1337_OAnMbiM7
+4a44a72e-205f-4016-95e7-fd77af04094d	mogalts_4oimb
 4a5c0247-bb1d-4ab3-8d93-4ad95cda0501	aeAlVl7Dr06MnLw
 4a6c0569-c27f-4ce2-b002-824562f1b7e4	LBladerywUwU
 4a7be17b-98a9-4b3a-88f1-95cdfbcac094	KIKINCore61b
@@ -453,6 +455,7 @@
 7e554ced-a740-4271-908d-4039e0636d49	cem1337_JPONOyH9
 7e920109-bc7d-47b9-b3bc-90891819730a	ltc_dz9h4n
 7f5849c3-c3e3-4d08-a18a-1434fc7b3697	PirGv
+7f76989c-c4b4-411a-9eab-ee96b5239b32	cem1337_g7DC8B3I
 7f7bbfb7-8a6c-43ad-9545-b61b04d11ab3	ZueCrestfzn0
 7fb2be2d-aa60-42d0-86d6-320156c0a432	Entitilo5i0o
 7fe572fb-ddcd-45fa-9cd1-6fa16ac8b98a	Sv2Fangger
@@ -520,6 +523,7 @@
 917e50bd-7c34-4db1-925b-7e5eacb98d79	hacoi1711bbu8
 91c0ccc7-e858-4eba-8fb8-d04b4ab17a6b	NuFoxai5fJK
 91c93c96-47c3-4779-b66a-568214d7de5c	cem1337_zVXuG9qj
+91f3fc9a-0b73-451d-9f85-4038d08a8ce5	mogalts_mhedg
 9222edc8-9368-4555-aac1-c196ba2f2b5a	IAJIydVO
 922f5ea1-cf91-4b34-b337-8fa9e7a892e2	KIKINPeak2q1
 9280edca-0f1e-4aa9-af2a-899e2c824547	hacoi17112c7w
@@ -850,7 +854,9 @@ f5dd809d-a89c-4e4e-9244-82ff125b10ac	dxGcTOdVb3Q2Ae
 f617d866-0d2a-44dc-a0c9-d933a2532f65	bagnoolfano1
 f644c797-a5de-4539-988e-e5ef4b73b5b1	QdgCyx2QPY5NuWU
 f6764613-90ff-46e6-bf39-bde88b9fd3eb	Mako5854
+f707485e-bdb4-47a7-abb9-338d123b78b9	cem1337_tH2rSVV2
 f7b2a709-008a-4108-a32a-0cca7b6bcd4f	0001011001000010
+f811e55d-52d2-4262-8eba-163f9f1fbbe8	mogalts_f6scj
 f8b7da32-f708-48c4-8ed6-e4a053890e36	ravanwasherediv
 f8fba4d4-a004-41c1-a10d-51aa43597327	ZueGrimkb70
 f9099225-8530-4047-83fe-fd369675f300	enemyclanFFAHC
