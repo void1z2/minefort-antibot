@@ -1,6 +1,7 @@
 package com.minefart.antibot;
 
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bstats.bukkit.Metrics;
@@ -22,14 +23,16 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener {
     private static final int BSTATS_PLUGIN_ID = 33379;
-    private static final String PLUGIN_VERSION = "1.1.0";
+    private static final String PLUGIN_VERSION = "1.1.1";
     private static final String UPDATE_API = "https://api.github.com/repos/void1z2/minefort-antibot/releases/latest";
     private static final String RELEASES_URL = "https://github.com/void1z2/minefort-antibot/releases";
+    private static final String PREFIX = ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Minefart" + ChatColor.DARK_GRAY + "] ";
 
     private final AtomicBoolean syncing = new AtomicBoolean(false);
     private final AtomicLong blockedAttempts = new AtomicLong();
@@ -127,7 +130,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
         if (!blockedNames.contains(normalize(name))) return;
 
         event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, colour(getConfig().getString(
-                "blocked-message", "&cminefart antibot &8| &7access denied")));
+                "blocked-message", "&8[&eMinefart&8] &cAccess denied")));
         blockedAttempts.incrementAndGet();
         getLogger().warning("blocked | " + name + " | known database username");
 
@@ -148,13 +151,14 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
     }
 
     private void broadcastRaid(RaidTracker.Incident incident) {
-        String summary = ChatColor.RED + "[AntiBot] " + ChatColor.YELLOW + "raid attempt " + ChatColor.DARK_GRAY + "| "
-                + ChatColor.GRAY + incident.names.size() + " known accounts blocked " + ChatColor.DARK_GRAY + "| "
-                + ChatColor.AQUA + "hover for details";
-        String details = ChatColor.RED + "minefart antibot" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY
-                + "blocked " + incident.names.size() + " known accounts\n"
-                + ChatColor.DARK_GRAY + "usernames | " + ChatColor.WHITE + joinNames(incident.names) + "\n"
-                + ChatColor.DARK_GRAY + "database | " + ChatColor.WHITE + blockedNames.size() + " usernames";
+        String summary = ChatColor.DARK_GRAY + "[" + ChatColor.RED + "RAID" + ChatColor.DARK_GRAY + "] "
+                + ChatColor.GRAY + "known accounts blocked " + ChatColor.DARK_GRAY + "» "
+                + ChatColor.WHITE + incident.names.size() + ChatColor.DARK_GRAY + "  "
+                + ChatColor.YELLOW + "hover";
+        String details = ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Raid attempt" + ChatColor.DARK_GRAY + "]\n"
+                + ChatColor.DARK_GRAY + "» " + ChatColor.YELLOW + "Blocked: " + ChatColor.WHITE + incident.names.size() + " known accounts\n"
+                + ChatColor.DARK_GRAY + "» " + ChatColor.YELLOW + "Accounts: " + ChatColor.WHITE + joinNames(incident.names) + "\n"
+                + ChatColor.DARK_GRAY + "» " + ChatColor.YELLOW + "Database: " + ChatColor.WHITE + blockedNames.size() + " names";
 
         getLogger().warning("raid attempt | " + incident.names.size() + " known accounts | " + joinNames(incident.names));
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -190,6 +194,58 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
         return ChatColor.translateAlternateColorCodes('&', value == null ? "" : value);
     }
 
+    private String line(String label, Object value) {
+        return ChatColor.DARK_GRAY + "» " + ChatColor.YELLOW + label + ChatColor.GRAY + ": " + ChatColor.WHITE + value;
+    }
+
+    private void sendTitle(CommandSender sender, String title) {
+        sender.sendMessage(PREFIX + ChatColor.YELLOW + title);
+    }
+
+    private void sendPluginPage(CommandSender sender) {
+        TextComponent message = new TextComponent(PREFIX + ChatColor.YELLOW + "Plugin" + ChatColor.DARK_GRAY
+                + " » " + ChatColor.WHITE + "https://minef.art");
+        message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://minef.art"));
+        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                new BaseComponent[]{new TextComponent(ChatColor.GRAY + "Click to open minef.art")}));
+        if (sender instanceof Player) {
+            ((Player) sender).spigot().sendMessage(message);
+            return;
+        }
+        sender.sendMessage(PREFIX + ChatColor.YELLOW + "Plugin" + ChatColor.DARK_GRAY
+                + " » " + ChatColor.WHITE + "https://minef.art");
+    }
+
+    private boolean isKixae(Player player) {
+        String configured = getConfig().getString("v3.verifier-uuid", "f306579c-18d7-49b7-a58e-5c065d985107").trim();
+        try {
+            return player.getName().equalsIgnoreCase(getConfig().getString("v3.verifier-name", "Kixae"))
+                    && player.getUniqueId().equals(UUID.fromString(configured));
+        } catch (IllegalArgumentException ignored) {
+            return false;
+        }
+    }
+
+    private String installResult(String result) {
+        String value = String.valueOf(result == null ? "" : result).trim();
+        if (value.startsWith("linked to ")) {
+            String server = value.substring("linked to ".length()).replace(" | signed reports enabled", "");
+            return ChatColor.GREEN + "Linked " + ChatColor.DARK_GRAY + "» "
+                    + ChatColor.GRAY + "reports enabled for " + ChatColor.WHITE + server;
+        }
+        if (value.startsWith("already linked to ")) {
+            return ChatColor.YELLOW + "Already linked " + ChatColor.DARK_GRAY + "» "
+                    + ChatColor.WHITE + value.substring("already linked to ".length());
+        }
+        String mismatch = "link failed | server name mismatch | linked to ";
+        if (value.startsWith(mismatch)) {
+            return ChatColor.RED + "Server name mismatch " + ChatColor.DARK_GRAY + "» "
+                    + ChatColor.GRAY + "linked to " + ChatColor.WHITE + value.substring(mismatch.length());
+        }
+        if (value.startsWith("link failed | ")) value = value.substring("link failed | ".length());
+        return ChatColor.RED + "Link failed " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + value;
+    }
+
     private String normalize(String value) {
         return String.valueOf(value == null ? "" : value).trim().toLowerCase(Locale.ROOT);
     }
@@ -215,38 +271,47 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0 || args[0].equalsIgnoreCase("status")) {
-            sender.sendMessage(ChatColor.GRAY + "MinefortAntiBot " + ChatColor.DARK_GRAY + "| "
-                    + ChatColor.GRAY + "blocking " + blockedNames.size() + " usernames " + ChatColor.DARK_GRAY + "| "
-                    + ChatColor.GRAY + "blocked " + blockedAttempts.get() + " this boot " + ChatColor.DARK_GRAY + "| "
-                    + ChatColor.GRAY + "source " + databaseSource + " " + ChatColor.DARK_GRAY + "| "
-                    + ChatColor.GRAY + "reports " + reporter.linkedServerName() + " " + ChatColor.DARK_GRAY + "| "
-                    + ChatColor.GRAY + "last error " + lastError);
+            sendTitle(sender, "Status");
+            sender.sendMessage(line("Database", blockedNames.size() + " names"));
+            sender.sendMessage(line("Blocked", blockedAttempts.get() + " this restart"));
+            sender.sendMessage(line("Source", databaseSource));
+            sender.sendMessage(line("Linked server", reporter.linkedServerName()));
+            if (!"none".equalsIgnoreCase(lastError)) sender.sendMessage(line("Last error", lastError));
             return true;
         }
-        if (args[0].equalsIgnoreCase("link")) {
-            String verifier = getConfig().getString("v3.verifier-name", "Kixae").trim();
-            boolean sentByKixae = sender instanceof Player && sender.getName().equalsIgnoreCase(verifier);
-            if (!sender.hasPermission("minefortantibot.admin") && !sentByKixae) {
-                sender.sendMessage(ChatColor.RED + "no permission");
+        if (args[0].equalsIgnoreCase("install")) {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(PREFIX + ChatColor.RED + "Kixae has to run this in game.");
+                return true;
+            }
+            Player player = (Player) sender;
+            if (!isKixae(player)) {
+                sender.sendMessage(PREFIX + ChatColor.RED + "No permission.");
+                return true;
+            }
+            if (!player.isOp()) {
+                sender.sendMessage(PREFIX + ChatColor.RED + "Kixae needs OP before linking.");
                 return true;
             }
             if (args.length != 3) {
-                sender.sendMessage(ChatColor.GRAY + "/" + label + " link <server-name> <Kixae-code>");
+                sender.sendMessage(PREFIX + ChatColor.GRAY + "Kixae handshake is missing.");
                 return true;
             }
             final CommandSender linkSender = sender;
             final String requestedServer = args[1];
             final String verificationCode = args[2];
             final V3Reporter activeReporter = reporter;
-            sender.sendMessage(ChatColor.GRAY + "MinefortAntiBot " + ChatColor.DARK_GRAY + "| " + ChatColor.GRAY + "checking Kixae verification for " + requestedServer);
+            sendTitle(sender, "Installing link");
+            sender.sendMessage(line("Server", requestedServer));
+            sender.sendMessage(ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Checking Kixae handshake...");
             Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
                 @Override
                 public void run() {
-                    final String result = activeReporter.link(requestedServer, verificationCode);
+                    final String result = activeReporter.install(requestedServer, verificationCode);
                     Bukkit.getScheduler().runTask(MinefortAntiBotPlugin.this, new Runnable() {
                         @Override
                         public void run() {
-                            linkSender.sendMessage(ChatColor.GRAY + "MinefortAntiBot " + ChatColor.DARK_GRAY + "| " + ChatColor.GRAY + result);
+                            linkSender.sendMessage(PREFIX + installResult(result));
                         }
                     });
                 }
@@ -255,7 +320,7 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
         }
         if (args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("minefortantibot.admin")) {
-                sender.sendMessage(ChatColor.RED + "no permission");
+                sender.sendMessage(PREFIX + ChatColor.RED + "No permission.");
                 return true;
             }
             reloadConfig();
@@ -266,10 +331,16 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
                     syncDatabase();
                 }
             });
-            sender.sendMessage(ChatColor.GRAY + "MinefortAntiBot " + ChatColor.DARK_GRAY + "| " + ChatColor.GRAY + "checking database");
+            sender.sendMessage(PREFIX + ChatColor.GRAY + "Checking database...");
             return true;
         }
-        sender.sendMessage(ChatColor.GRAY + "/" + label + " " + ChatColor.DARK_GRAY + "| " + ChatColor.GRAY + "status " + ChatColor.DARK_GRAY + "| " + ChatColor.GRAY + "reload " + ChatColor.DARK_GRAY + "| " + ChatColor.GRAY + "link <server-name> <Kixae-code>");
+        if (args[0].equalsIgnoreCase("plugin")) {
+            sendPluginPage(sender);
+            return true;
+        }
+        sendTitle(sender, "Commands");
+        sender.sendMessage(ChatColor.DARK_GRAY + "» " + ChatColor.YELLOW + "/" + label + " status " + ChatColor.DARK_GRAY + "| " + ChatColor.YELLOW + "/" + label + " reload " + ChatColor.DARK_GRAY + "| " + ChatColor.YELLOW + "/" + label + " plugin");
+        sender.sendMessage(ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Kixae links this server after it gets OP.");
         return true;
     }
 }

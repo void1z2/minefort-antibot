@@ -8,7 +8,7 @@ update-minutes: 1
 check-updates: true
 update-check-hours: 12
 
-blocked-message: "&cminefart antibot &8| &7access denied"
+blocked-message: "&8[&eMinefart&8] &cAccess denied"
 
 raid:
   minimum-known-accounts: 3
@@ -20,3 +20,4 @@ v3:
   base-url: "https://minef.art"
   allow-http: false
   verifier-name: "Kixae"
+  verifier-uuid: "f306579c-18d7-49b7-a58e-5c065d985107"

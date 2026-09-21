@@ -41,20 +41,21 @@ final class V3Reporter {
         loadLink();
     }
 
-    synchronized String link(String requestedServer, String verificationCode) {
+    synchronized String install(String requestedServer, String handshakeToken) {
         String requested = String.valueOf(requestedServer == null ? "" : requestedServer).trim().toLowerCase();
-        String code = String.valueOf(verificationCode == null ? "" : verificationCode).trim().toUpperCase();
+        String token = String.valueOf(handshakeToken == null ? "" : handshakeToken).trim().toUpperCase();
         if (!requested.matches("^[a-z0-9_-]{1,64}$")) return "link failed | invalid server name";
-        if (!code.matches("^[A-Z0-9_-]{6,32}$")) return "link failed | invalid Kixae verification code";
+        if (!token.matches("^[A-Z0-9_-]{6,64}$")) return "link failed | invalid Kixae handshake";
         if (isLinked() && requested.equals(serverName)) return "already linked to " + serverName;
+        if (isLinked()) return "link failed | server name mismatch | linked to " + serverName;
         if (empty(baseUrl)) return "link failed | reporting url is missing";
         if (!validTransport()) {
             return "link failed | reporting url must use https";
         }
         HttpURLConnection connection = null;
         try {
-            byte[] body = ("server=" + encode(requested) + "&code=" + encode(code)).getBytes(StandardCharsets.UTF_8);
-            connection = open("/v1/link", "application/x-www-form-urlencoded", body.length);
+            byte[] body = ("server=" + encode(requested) + "&token=" + encode(token)).getBytes(StandardCharsets.UTF_8);
+            connection = open("/v1/handshake", "application/x-www-form-urlencoded", body.length);
             try (OutputStream output = connection.getOutputStream()) { output.write(body); }
             int status = connection.getResponseCode();
             String response = readResponse(connection, status);

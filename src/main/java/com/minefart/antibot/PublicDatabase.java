@@ -35,7 +35,7 @@ final class PublicDatabase {
         HttpURLConnection con = (HttpURLConnection) new URL(address).openConnection();
         con.setConnectTimeout(10000);
         con.setReadTimeout(15000);
-        con.setRequestProperty("User-Agent", "MinefortAntiBot/1.1.0");
+        con.setRequestProperty("User-Agent", "MinefortAntiBot/1.1.1");
         con.setUseCaches(false);
         int status = con.getResponseCode();
         if (status < 200 || status >= 300) {

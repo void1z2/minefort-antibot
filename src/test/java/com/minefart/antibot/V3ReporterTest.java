@@ -25,7 +25,7 @@ public class V3ReporterTest {
     public void pluginLinksItselfAndKeepsTheSigningKeyOnDisk() throws Exception {
         final AtomicReference<String> body = new AtomicReference<String>();
         HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
-        server.createContext("/v1/link", new HttpHandler() {
+        server.createContext("/v1/handshake", new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
                 body.set(read(exchange.getRequestBody()));
@@ -47,10 +47,10 @@ public class V3ReporterTest {
             config.set("v3.allow-http", true);
             V3Reporter reporter = new V3Reporter(folder, config, Logger.getAnonymousLogger(), "1.1.0");
 
-            assertEquals("linked to dueled | signed reports enabled", reporter.link("Dueled", "KIXAE123"));
+            assertEquals("linked to dueled | signed reports enabled", reporter.install("Dueled", "KIXAE123"));
             assertTrue(reporter.isLinked());
             assertEquals("dueled", reporter.linkedServerName());
-            assertEquals("server=dueled&code=KIXAE123", body.get());
+            assertEquals("server=dueled&token=KIXAE123", body.get());
 
             Properties saved = new Properties();
             InputStream input = Files.newInputStream(new File(folder, "v3-link.properties").toPath());
@@ -72,8 +72,8 @@ public class V3ReporterTest {
         YamlConfiguration config = new YamlConfiguration();
         config.set("v3.base-url", "https://minef.art");
         V3Reporter reporter = new V3Reporter(folder, config, Logger.getAnonymousLogger(), "1.1.0");
-        assertEquals("link failed | invalid server name", reporter.link("not a server", "KIXAE123"));
-        assertEquals("link failed | invalid Kixae verification code", reporter.link("dueled", "no"));
+        assertEquals("link failed | invalid server name", reporter.install("not a server", "KIXAE123"));
+        assertEquals("link failed | invalid Kixae handshake", reporter.install("dueled", "no"));
     }
 
     private static String read(InputStream input) throws IOException {
