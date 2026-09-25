@@ -866,6 +866,7 @@ mogalts_ryu50
 mogalts_swrkb
 mogalts_u0wdc
 mogalts_v54tx
+mogalts_v9nt6
 mogalts_w7j1q
 mogalts_widac
 mogalts_wqqik
