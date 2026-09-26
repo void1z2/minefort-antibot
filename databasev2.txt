@@ -65,7 +65,7 @@
 0d20f6a4-524e-4b9a-ab17-65a479a57d2b	RevLolIce36k
 0d612b7d-0908-452b-ba7b-3383181ea129	Anys01
 0d7656a1-d46e-434c-87ff-11f6355476af	alxxq
-0d9ddb7f-eba4-4072-a4be-a789e45c426c	KIKINDuskbs1
+0d9ddb7f-eba4-4072-a4be-a789e45c426c	cem1337_yqUNUWBp
 0de045ea-6e0f-46d9-b80c-cb048b50c0d9	KIKINGaleasa
 0e60addd-0090-4db2-88aa-66d914e5afc0	NuForgeo6a2JK
 0e6237f4-de19-412d-8c56-a27013568a32	cem1337_GBkorRlS
@@ -489,6 +489,7 @@
 755df5f5-e904-4b25-9c00-a930c12c667d	mogalts_ko0br
 75b7954d-c1af-41d3-91c8-6685b3b65a0f	mogalts_ii6ms
 75cadc2a-23fc-4c7b-94ed-b07754b5f16d	KIKINDawn2zk
+75de8ea4-f3c9-4fd5-b5b0-a93f8ff03f2f	cem1337_uCMsrXEL
 7605c25b-4a54-4b8f-a2b4-e6ccfbb12ea7	mogalts_swrkb
 76477fac-fb0e-4e96-b047-b11adb45be6b	IIShuajbII
 76985cef-b096-4e06-b12b-e0485eb37f24	crassSd4optive
@@ -908,7 +909,7 @@ de58e0f2-8bc5-4f86-8fce-0bd6f1f516aa	relapseSwift9l7
 de6bd0c7-c775-44c3-9bb8-4c25d5541a25	Sl1zoxNeonn4q
 df08f81b-e42e-4f1b-b50f-c931fc97d702	fifthLnluc3ky
 df14498c-8ba6-4b3b-b2a0-f2f1f2b9f6ce	KIKINFrostttg
-dffbba7b-dc9c-40b3-9cab-3236118626e2	RevLolSharp92b
+dffbba7b-dc9c-40b3-9cab-3236118626e2	cem1337_Kh7Bm8c3
 e0366d41-9007-41c2-8e70-74808a6fd03e	ZANATO2cohacker
 e0c345bf-f632-4853-a20b-df62b69a207c	Entitilo_WFWxC
 e1027958-b4c5-46e1-8d0b-3a59d7f1144b	Ru34Logsx44
