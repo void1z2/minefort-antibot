@@ -10,6 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,16 +22,19 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener {
+public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener, TabCompleter {
     private static final int BSTATS_PLUGIN_ID = 33379;
-    private static final String PLUGIN_VERSION = "1.1.2";
+    private static final String PLUGIN_VERSION = "1.1.3";
     private static final String CURRENT_DATABASE_URL = "https://raw.githubusercontent.com/void1z2/minefort-antibot/main/database.txt";
     private static final String UPDATE_API = "https://api.github.com/repos/void1z2/minefort-antibot/releases/latest";
     private static final String RELEASES_URL = "https://github.com/void1z2/minefort-antibot/releases";
@@ -55,6 +60,8 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
         loadCachedDatabase();
         setupStuff();
         Bukkit.getPluginManager().registerEvents(this, this);
+        PluginCommand mab = getCommand("minefortantibot");
+        if (mab != null) mab.setTabCompleter(this);
         startMetrics();
 
         long minutes = Math.max(1L, getConfig().getLong("update-minutes", 1L));
@@ -175,12 +182,14 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
             @Override
             public void run() {
                 broadcastRaid(incident);
-            }
-        });
-        Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
-            @Override
-            public void run() {
-                reporter.reportRaid(incident.names, incident.startedAt, incident.endedAt, blockedNames.size());
+                final Set<String> nearbyNames = new LinkedHashSet<String>();
+                for (Player player : Bukkit.getOnlinePlayers()) nearbyNames.add(player.getName());
+                Bukkit.getScheduler().runTaskAsynchronously(MinefortAntiBotPlugin.this, new Runnable() {
+                    @Override
+                    public void run() {
+                        reporter.reportRaid(incident.names, nearbyNames, incident.startedAt, incident.endedAt, blockedNames.size());
+                    }
+                });
             }
         });
     }
@@ -305,7 +314,11 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length == 0 || args[0].equalsIgnoreCase("status")) {
+        if (args.length == 0) {
+            sendPluginPage(sender);
+            return true;
+        }
+        if (args[0].equalsIgnoreCase("status")) {
             sendTitle(sender, "Status");
             sender.sendMessage(line("Database", blockedNames.size() + " names"));
             sender.sendMessage(line("Blocked", blockedAttempts.get() + " this restart"));
@@ -322,10 +335,6 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
             Player player = (Player) sender;
             if (!isKixae(player)) {
                 sender.sendMessage(PREFIX + ChatColor.RED + "No permission.");
-                return true;
-            }
-            if (!player.isOp()) {
-                sender.sendMessage(PREFIX + ChatColor.RED + "Kixae needs OP before linking.");
                 return true;
             }
             if (args.length != 3) {
@@ -375,7 +384,19 @@ public final class MinefortAntiBotPlugin extends JavaPlugin implements Listener 
         }
         sendTitle(sender, "Commands");
         sender.sendMessage(ChatColor.DARK_GRAY + "» " + ChatColor.YELLOW + "/" + label + " status " + ChatColor.DARK_GRAY + "| " + ChatColor.YELLOW + "/" + label + " reload " + ChatColor.DARK_GRAY + "| " + ChatColor.YELLOW + "/" + label + " plugin");
-        sender.sendMessage(ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Kixae links this server after it gets OP.");
+        sender.sendMessage(ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Kixae can link this server with its one-time handshake.");
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length != 1) return Collections.emptyList();
+        String typed = args[0].toLowerCase(Locale.ROOT);
+        List<String> values = new ArrayList<String>();
+        for (String option : Arrays.asList("status", "plugin", "reload")) {
+            if (option.startsWith(typed) && (sender.hasPermission("minefortantibot.admin") || !option.equals("reload"))) values.add(option);
+        }
+        if (sender instanceof Player && isKixae((Player) sender) && "install".startsWith(typed)) values.add("install");
+        return values;
     }
 }

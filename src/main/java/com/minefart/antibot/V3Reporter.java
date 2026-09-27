@@ -77,12 +77,13 @@ final class V3Reporter {
         }
     }
 
-    void reportRaid(Set<String> names, long startedAt, long endedAt, int databaseSize) {
+    void reportRaid(Set<String> names, Set<String> nearbyNames, long startedAt, long endedAt, int databaseSize) {
         if (!isLinked() || !validTransport()) return;
         String body = "{\"type\":\"known_raid\",\"server\":\"" + json(serverName)
                 + "\",\"startedAt\":" + startedAt + ",\"endedAt\":" + endedAt
                 + ",\"databaseSize\":" + databaseSize + ",\"pluginVersion\":\"" + json(pluginVersion)
-                + "\",\"usernames\":[" + jsonNames(names) + "]}";
+                + "\",\"usernames\":[" + jsonNames(names) + "]"
+                + ",\"nearbyUsernames\":[" + jsonNames(nearbyNames) + "]}";
         sendEvent(body);
     }
 
