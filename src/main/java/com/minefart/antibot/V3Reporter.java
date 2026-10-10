@@ -47,14 +47,16 @@ final class V3Reporter {
         if (!requested.matches("^[a-z0-9_-]{1,64}$")) return "link failed | invalid server name";
         if (!token.matches("^[A-Z0-9_-]{6,64}$")) return "link failed | invalid Kixae handshake";
         if (isLinked() && requested.equals(serverName)) return "already linked to " + serverName;
-        if (isLinked()) return "link failed | server name mismatch | linked to " + serverName;
         if (empty(baseUrl)) return "link failed | reporting url is missing";
         if (!validTransport()) {
             return "link failed | reporting url must use https";
         }
         HttpURLConnection connection = null;
         try {
-            byte[] body = ("server=" + encode(requested) + "&token=" + encode(token)).getBytes(StandardCharsets.UTF_8);
+            String form = "server=" + encode(requested) + "&token=" + encode(token);
+            if (isLinked()) form += "&serverId=" + encode(serverId) + "&proof="
+                    + encode(hmac("rename\n" + serverId + "\n" + requested + "\n" + token));
+            byte[] body = form.getBytes(StandardCharsets.UTF_8);
             connection = open("/v1/handshake", "application/x-www-form-urlencoded", body.length);
             try (OutputStream output = connection.getOutputStream()) { output.write(body); }
             int status = connection.getResponseCode();
