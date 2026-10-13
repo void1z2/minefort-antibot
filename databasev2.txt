@@ -29,6 +29,7 @@
 053e0a54-8d06-474b-9c76-2c7f66a07165	conquestanalyzer
 055ff635-212a-4b14-b01e-9397aa2c34b1	IcyzSwiftz7b
 0560d812-8da5-4277-a4ff-93497f658d75	Mr_xaio
+056a69d7-645f-47e6-8544-800a4995116d	cem1337_PVr2VRRC
 058e029b-3d40-41f5-b03c-eab20da6b5c8	Entitilonwto
 05c54204-7ef1-47b0-b6c6-004acc51340a	qpbqpbpqbpdbqdbp
 062543ab-01b8-48eb-913b-e09fb8053ef4	mangkorn_rPhvP
@@ -859,6 +860,7 @@ b821286b-6c14-4001-a5e8-f84c454749be	ShyebyMC
 b87b378b-e47b-48ac-aee0-b10f6b8bd2fd	btc_90lojz8edlsy
 b90f8f2e-660c-42a1-bfe9-79aeba5c9a7a	Zue_Fox20v_XD
 b921c9a0-738e-4651-8c10-9533674f7cfe	71290937304570
+b95a5e1b-1b0e-4623-b8fd-b56f3a27c494	cem1337_elSZzdOG
 b9c127e7-c7d5-41e0-a420-d3f3727753d2	Flatbuttalt
 b9c9b328-a59b-404e-b925-0c53e0864b85	ZANATO4n1hacker
 b9d4ca41-28c5-4ff9-93ef-1efaf165be8a	NuDark9lm9JK
