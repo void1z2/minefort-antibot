@@ -1216,6 +1216,7 @@ mogalts_r7b8n
 mogalts_ryu50
 mogalts_s8u32
 mogalts_swrkb
+mogalts_tt92a
 mogalts_u0wdc
 mogalts_v54tx
 mogalts_v9nt6
