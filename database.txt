@@ -52,6 +52,7 @@
 7134509273402
 7134906873095
 714059860495586
+71839475389475
 7cts6pqsvdqz62
 7oodaBladey67
 7VhDV
@@ -191,6 +192,7 @@ breathtak8ingad
 btc_0owm939grxcy
 btc_0vpnrg3hqu
 btc_0vz2c6oh00lo
+btc_19fp55gdk5je
 btc_1d9b706gaztk
 btc_31nbz54itod8
 btc_3574ayh0de
@@ -1632,6 +1634,7 @@ zntValeedttkjgx
 zntWolf7t5pdotk
 zQ5D
 ZsI1
+Zue_Bear72k_XD
 Zue_Dawnn9v_XD
 Zue_Dusk0bo_XD
 Zue_Dusk2xi_XD
