@@ -1218,6 +1218,7 @@ mogalts_ck3kc
 mogalts_czcp8
 mogalts_d2w1k
 mogalts_dfo40
+mogalts_disbb
 mogalts_dqf28
 mogalts_dwqnm
 mogalts_e7whq
