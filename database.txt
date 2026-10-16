@@ -1250,6 +1250,7 @@ mogalts_pnb8y
 mogalts_q04zk
 mogalts_qkidn
 mogalts_r7b8n
+mogalts_r7oy7
 mogalts_ryu50
 mogalts_s8u32
 mogalts_swrkb
