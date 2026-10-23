@@ -1401,6 +1401,7 @@ mogalts_no25g
 mogalts_ntvd5
 mogalts_nuczd
 mogalts_ny0vd
+mogalts_ny68w
 mogalts_o6156
 mogalts_oo220
 mogalts_owujq
